@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FollowMyEyes
+namespace FollowMyEyes.UI
 {
-    public partial class Form1 : Form
+    public partial class ConfigurationWindow : Form
     {
-        public Form1()
+        public ConfigurationWindow()
         {
             InitializeComponent();
         }

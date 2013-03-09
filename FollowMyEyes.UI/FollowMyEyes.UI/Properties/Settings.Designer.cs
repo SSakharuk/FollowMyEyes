@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FollowMyEyes.Properties
+namespace FollowMyEyes.UI.Properties
 {
 
 

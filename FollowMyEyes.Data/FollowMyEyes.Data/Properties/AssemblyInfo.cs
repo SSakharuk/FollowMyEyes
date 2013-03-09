@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FollowMyEyes")]
+[assembly: AssemblyTitle("FollowMyEyes.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FollowMyEyes")]
+[assembly: AssemblyProduct("FollowMyEyes.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d2fe6fd8-216d-48a8-a21f-f12b5c44a252")]
+[assembly: Guid("2bf11ea9-7760-4155-9982-0458df7c7f22")]
 
 // Version information for an assembly consists of the following four values:
 //
