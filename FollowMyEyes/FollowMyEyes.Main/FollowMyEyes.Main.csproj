@@ -2,18 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FB76FB2A-C9D2-4DFF-AA47-4795AAB0E7D4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{7B6E5665-141D-496D-9C65-BC0BFEBF76B7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FollowMyEyes.Logic</RootNamespace>
-    <AssemblyName>FollowMyEyes.Logic</AssemblyName>
+    <RootNamespace>FollowMyEyes.Main</RootNamespace>
+    <AssemblyName>FollowMyEyes.Main</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -37,19 +40,49 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FollowMyEyes.Data\FollowMyEyes.Data.csproj">
       <Project>{06D04A79-7AB4-4247-94F7-1C7D82915174}</Project>
       <Name>FollowMyEyes.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FollowMyEyes.Logic\FollowMyEyes.Logic.csproj">
+      <Project>{FB76FB2A-C9D2-4DFF-AA47-4795AAB0E7D4}</Project>
+      <Name>FollowMyEyes.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FollowMyEyes.ModelTemplate\FollowMyEyes.ModelTemplate.csproj">
       <Project>{A9813E95-802E-4AF4-A379-B2174D47BAED}</Project>
       <Name>FollowMyEyes.ModelTemplate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FollowMyEyes.UI\FollowMyEyes.UI.csproj">
+      <Project>{56BD24BA-1037-4147-9AA9-45DA5BA5E8E6}</Project>
+      <Name>FollowMyEyes.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

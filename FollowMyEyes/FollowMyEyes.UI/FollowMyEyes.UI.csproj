@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FB76FB2A-C9D2-4DFF-AA47-4795AAB0E7D4}</ProjectGuid>
+    <ProjectGuid>{56BD24BA-1037-4147-9AA9-45DA5BA5E8E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FollowMyEyes.Logic</RootNamespace>
-    <AssemblyName>FollowMyEyes.Logic</AssemblyName>
+    <RootNamespace>FollowMyEyes.UI</RootNamespace>
+    <AssemblyName>FollowMyEyes.UI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationPresenter.cs" />
+    <Compile Include="IConfigurationView.cs" />
+    <Compile Include="WindowViewLoader.cs" />
+    <Compile Include="ConfigurationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationWindow.Designer.cs">
+      <DependentUpon>ConfigurationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IViewLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FollowMyEyes.Data\FollowMyEyes.Data.csproj">
-      <Project>{06D04A79-7AB4-4247-94F7-1C7D82915174}</Project>
-      <Name>FollowMyEyes.Data</Name>
+    <ProjectReference Include="..\FollowMyEyes.Logic\FollowMyEyes.Logic.csproj">
+      <Project>{FB76FB2A-C9D2-4DFF-AA47-4795AAB0E7D4}</Project>
+      <Name>FollowMyEyes.Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\FollowMyEyes.ModelTemplate\FollowMyEyes.ModelTemplate.csproj">
       <Project>{A9813E95-802E-4AF4-A379-B2174D47BAED}</Project>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("FollowMyEyes.Logic")]
+[assembly: AssemblyTitle("FollowMyEyes.Main")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FollowMyEyes.Logic")]
+[assembly: AssemblyProduct("FollowMyEyes.Main")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("a2bb3713-3a5b-44d4-a0cf-5191860c4fce")]
+[assembly: Guid("239d6d5c-a4fc-45fd-99dc-1ad9f4f984a7")]
 
 // Version information for an assembly consists of the following four values:
 //
