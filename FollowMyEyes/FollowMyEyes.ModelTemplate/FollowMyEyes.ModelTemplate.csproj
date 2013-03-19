@@ -44,6 +44,7 @@
     <Compile Include="IConfiguration.cs" />
     <Compile Include="IData.cs" />
     <Compile Include="IMainDetails.cs" />
+    <Compile Include="IProcessInfo.cs" />
     <Compile Include="ISize.cs" />
     <Compile Include="IWindowConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

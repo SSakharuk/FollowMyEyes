@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using FollowMyEyes.ModelTemplate;
 
 namespace FollowMyEyes.Data
 {
-	public class ProcessesInfo
+	public class ProcessesInfo : IProcessInfo
 	{
-		[DllImport("user32.dll")]
-		static extern bool SetForegroundWindow(IntPtr hWnd);
+		#region IProcessInfo Members
 
-		public static IEnumerable<string> GetProcesses()
-		{
-			Process[] processes = Process.GetProcesses();
-			return processes.Select(process => process.ProcessName).ToList();
-		}
+		public int ProcessId { get; set; }
+		public string ProcessName { get; set; }
+		public string ProcessMainWindowTitle { get; set; }
+
+		#endregion
 	}
 }

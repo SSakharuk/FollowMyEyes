@@ -14,24 +14,8 @@ namespace FollowMyEyes.Data
 		public double DetectionDelay { get; set; }
 		public string ActionButtonName { get; set; }
 		public string ProcessesLabel { get; set; }
-		public IEnumerable<string> ProcessesName { get; set; }
-
-		public void SetDefaultConfiguration()
-		{
-			WindowWidth = 640;
-			WindowHeight = 480;
-			Name = "Configuration Window";
-			DetailsDescription = "None";
-			ActionButtonName = "Follow Eyes";
-			ProcessesLabel = "Available Processes";
-			DetectionDelay = 0.1d;
-			ProcessesName = ProcessesInfo.GetProcesses();
-		}
-			
-
+		public IEnumerable<IProcessInfo> ProcessesList { get; set; }
 
 		#endregion
-
-		
 	}
 }

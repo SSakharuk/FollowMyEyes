@@ -1,4 +1,7 @@
-﻿namespace FollowMyEyes.UI
+﻿using System.Collections.Generic;
+using FollowMyEyes.ModelTemplate;
+
+namespace FollowMyEyes.UI
 {
 	public interface IConfigurationView
 	{
@@ -11,5 +14,7 @@
 		string WindowName { set; }
 
 		string ActionButtonName { set; }
+
+		IEnumerable<IProcessInfo> Processes { set; }
 	}
 }

@@ -6,6 +6,6 @@ namespace FollowMyEyes.ModelTemplate
 	{
 		string ActionButtonName { get; set; }
 		string ProcessesLabel { get; set; }
-		IEnumerable<string> ProcessesName { get; set; }
+		IEnumerable<IProcessInfo> ProcessesList { get; set; }
 	}
 }

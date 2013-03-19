@@ -28,7 +28,6 @@ namespace FollowMyEyes.UI
 			presenter.View = view;
 			presenter.UpdateWindowValues();
 			LoadView(view);
-			
 		}
 
 		#endregion
@@ -38,7 +37,5 @@ namespace FollowMyEyes.UI
 			view.Show();
 			_lastView = view;
 		}
-
-		
 	}
 }

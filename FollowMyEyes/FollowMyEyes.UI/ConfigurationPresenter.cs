@@ -5,12 +5,11 @@ namespace FollowMyEyes.UI
 	public class ConfigurationPresenter
 	{
 		private readonly IData _data;
-		private IViewLoader _viewLoader;
 		private IConfigurationView _view;
+		private IViewLoader _viewLoader;
 
 		public ConfigurationPresenter(IData data, IViewLoader viewLoader)
 		{
-			this._view = _view;
 			_data = data;
 			_viewLoader = viewLoader;
 		}
@@ -32,6 +31,7 @@ namespace FollowMyEyes.UI
 			UpdateWindowHeight();
 			UpdateWindowName();
 			UpdateActionButtonText();
+			UpdateProcesses();
 		}
 
 		private void UpdateWindowWidth()
@@ -52,6 +52,11 @@ namespace FollowMyEyes.UI
 		private void UpdateActionButtonText()
 		{
 			_view.ActionButtonName = Data.ActionButtonName;
+		}
+
+		private void UpdateProcesses()
+		{
+			_view.Processes = Data.ProcessesList;
 		}
 	}
 }
