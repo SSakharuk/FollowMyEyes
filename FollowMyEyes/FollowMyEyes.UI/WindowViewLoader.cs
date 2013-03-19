@@ -24,11 +24,11 @@ namespace FollowMyEyes.UI
 		{
 			var view = new ConfigurationWindow();
 			var presenter = new ConfigurationPresenter(_data, this);
-
 			view.Presenter = presenter;
 			presenter.View = view;
-
+			presenter.UpdateWindowValues();
 			LoadView(view);
+			
 		}
 
 		#endregion
@@ -38,5 +38,7 @@ namespace FollowMyEyes.UI
 			view.Show();
 			_lastView = view;
 		}
+
+		
 	}
 }
