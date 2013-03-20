@@ -10,8 +10,7 @@ namespace FollowMyEyes.Logic
 {
 	public class ProcessesLogic
 	{
-		[DllImport("user32.dll")]
-		private static extern bool SetForegroundWindow(IntPtr hWnd);
+		
 
 		public static IEnumerable<IProcessInfo> GetProcesses()
 		{

@@ -1,4 +1,11 @@
-﻿using FollowMyEyes.ModelTemplate;
+﻿using System;
+using System.Drawing;
+using System.Windows.Threading;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using FollowMyEyes.Logic;
+using FollowMyEyes.ModelTemplate;
 
 namespace FollowMyEyes.UI
 {
@@ -7,6 +14,9 @@ namespace FollowMyEyes.UI
 		private readonly IData _data;
 		private IConfigurationView _view;
 		private IViewLoader _viewLoader;
+		private Capture _capture;
+		private DispatcherTimer _dispatcherTimer;
+		private HaarCascade _haarCascade;
 
 		public ConfigurationPresenter(IData data, IViewLoader viewLoader)
 		{
@@ -25,13 +35,31 @@ namespace FollowMyEyes.UI
 			get { return _data; }
 		}
 
-		public void UpdateWindowValues()
+		public void UpdateWindowControls()
 		{
 			UpdateWindowWidth();
 			UpdateWindowHeight();
 			UpdateWindowName();
 			UpdateActionButtonText();
 			UpdateProcesses();
+			StartCameraDetection();
+		}
+
+		public void StartFollowEyes()
+		{
+			StopCameraDetection();
+			CheckEyes();
+
+		}
+
+		private void CheckEyes()
+		{
+			_capture = _capture ?? new Capture();
+			_haarCascade = _haarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
+			_dispatcherTimer = _dispatcherTimer ?? new DispatcherTimer();
+			_dispatcherTimer.Tick += CheckEyes;
+			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+			_dispatcherTimer.Start();
 		}
 
 		private void UpdateWindowWidth()
@@ -61,12 +89,33 @@ namespace FollowMyEyes.UI
 
 		private void UpdateImage()
 		{
-			_view.ImageSource = Data.Image;
+			_view.ImageSource = DetectionLogic.GetImageFromCamera(_capture, _haarCascade);
 		}
 
-		//private void UpdateDetectionDelay()
-		//{
-		//    _view. = Data.DetectionDelay;
-		//}
+		private void StartCameraDetection()
+		{
+			_capture = _capture ?? new Capture();
+			_haarCascade = _haarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
+			_dispatcherTimer =_dispatcherTimer ?? new DispatcherTimer();
+			_dispatcherTimer.Tick += ShowCameraFrame;
+			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+			_dispatcherTimer.Start();
+		}
+
+		private void StopCameraDetection()
+		{
+			_dispatcherTimer.Stop();
+			_dispatcherTimer.Tick -= ShowCameraFrame;
+		}
+
+		private void ShowCameraFrame(object sender, EventArgs e)
+		{
+			UpdateImage();
+		}
+
+		private void CheckEyes(object sender, EventArgs e)
+		{
+			DetectionLogic.CheckEyesDetection(_capture, _haarCascade);
+		}
 	}
 }

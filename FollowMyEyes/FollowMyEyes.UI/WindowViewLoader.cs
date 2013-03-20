@@ -26,7 +26,7 @@ namespace FollowMyEyes.UI
 			var presenter = new ConfigurationPresenter(_data, this);
 			view.Presenter = presenter;
 			presenter.View = view;
-			presenter.UpdateWindowValues();
+			presenter.UpdateWindowControls();
 			LoadView(view);
 		}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Threading;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -9,32 +10,45 @@ namespace FollowMyEyes.Logic
 {
 	public class DetectionLogic
 	{
-		private Capture _capture;
-		private DispatcherTimer _dispatcherTimer;
-		private HaarCascade _haarCascade;
+		[DllImport("user32.dll")]
+		private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-		public IImage GetImageFromCamera()
+		public static IImage GetImageFromCamera(Capture capture, HaarCascade haarCascade)
 		{
-			_capture = new Capture();
-			_haarCascade = new HaarCascade(@"haarcascade_frontalface_alt.xml");
-			_dispatcherTimer.Tick += TimerTick;
-			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-			_dispatcherTimer.Start();
-			return null;
-		}
-
-		private void TimerTick(object sender, EventArgs e)
-		{
-			using (Image<Bgr, byte> frame = _capture.QueryFrame())
+			Image<Bgr, byte> frame;
+			using (frame = capture.QueryFrame())
 			{
 				if (frame != null)
 				{
 					Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();
-					MCvAvgComp[][] faces = grayFrame.DetectHaarCascade(_haarCascade, 1.4, 4, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
-					                                                   new Size(640, 480));
+					MCvAvgComp[][] faces = grayFrame.DetectHaarCascade(haarCascade, 1.4, 4, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
+																	   new Size(640, 480));
 
 					foreach (MCvAvgComp face in faces[0])
 						frame.Draw(face.rect, new Bgr(0, double.MaxValue, 0), 3);
+				}
+			}
+			return frame;
+		}
+
+		public static void CheckEyesDetection(Capture capture, HaarCascade haarCascade)
+		{
+			using (Image<Bgr, byte> frame = capture.QueryFrame())
+			{
+				if (frame != null)
+				{
+					Image<Gray, Byte> grayFrame = frame.Convert<Gray, Byte>();
+					MCvAvgComp[][] faces = grayFrame.DetectHaarCascade(haarCascade, 1.4, 4, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
+																	   new Size(640, 480));
+
+					if(faces[0].Length >1)
+					{
+						System.Diagnostics.Process[] p = System.Diagnostics.Process.GetProcessesByName("notepad");
+						if (p.Length > 0)
+						{
+							SetForegroundWindow(p[0].MainWindowHandle);
+						}
+					}
 				}
 			}
 		}
