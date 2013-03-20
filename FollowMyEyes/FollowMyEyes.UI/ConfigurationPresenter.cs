@@ -58,5 +58,15 @@ namespace FollowMyEyes.UI
 		{
 			_view.Processes = Data.ProcessesList;
 		}
+
+		private void UpdateImage()
+		{
+			_view.ImageSource = Data.Image;
+		}
+
+		//private void UpdateDetectionDelay()
+		//{
+		//    _view. = Data.DetectionDelay;
+		//}
 	}
 }

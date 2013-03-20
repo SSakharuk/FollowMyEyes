@@ -20,7 +20,7 @@ namespace FollowMyEyes.UI
 
 		#region IViewLoader Members
 
-		public void LoadConfigurationView()
+		public void LoadView()
 		{
 			var view = new ConfigurationWindow();
 			var presenter = new ConfigurationPresenter(_data, this);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Emgu.CV;
 using FollowMyEyes.ModelTemplate;
 
 namespace FollowMyEyes.UI
@@ -16,5 +17,7 @@ namespace FollowMyEyes.UI
 		string ActionButtonName { set; }
 
 		IEnumerable<IProcessInfo> Processes { set; }
+
+		IImage ImageSource { set; }
 	}
 }

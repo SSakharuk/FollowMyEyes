@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Emgu.CV;
 using FollowMyEyes.ModelTemplate;
 
 namespace FollowMyEyes.Data
@@ -12,6 +13,7 @@ namespace FollowMyEyes.Data
 		public string Name { get; set; }
 		public string DetailsDescription { get; set; }
 		public double DetectionDelay { get; set; }
+		public IImage Image { get; set; }
 		public string ActionButtonName { get; set; }
 		public string ProcessesLabel { get; set; }
 		public IEnumerable<IProcessInfo> ProcessesList { get; set; }

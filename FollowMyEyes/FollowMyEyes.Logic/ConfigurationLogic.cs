@@ -13,7 +13,7 @@ namespace FollowMyEyes.Logic
 
 		private void SetDefaultConfiguration(Configuration configuration)
 		{
-			configuration.WindowWidth = 640;
+			configuration.WindowWidth = 1080;
 			configuration.WindowHeight = 480;
 			configuration.Name = "Configuration Window";
 			configuration.DetailsDescription = "None";

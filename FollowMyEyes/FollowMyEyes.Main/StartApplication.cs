@@ -16,7 +16,7 @@ namespace FollowMyEyes.Main
 		{
 			IData data = new ConfigurationLogic().GetDefaultConfiguration();
 			var windowViewLoader = new WindowViewLoader(data);
-			windowViewLoader.LoadConfigurationView();
+			windowViewLoader.LoadView();
 			Application.Run(windowViewLoader.LastView);
 		}
 	}

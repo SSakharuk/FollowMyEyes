@@ -2,6 +2,6 @@
 {
 	public interface IViewLoader
 	{
-		void LoadConfigurationView();
+		void LoadView();
 	}
 }
