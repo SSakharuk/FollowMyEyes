@@ -8,7 +8,5 @@ namespace FollowMyEyes.UI
 		{
 			InitializeComponent();
 		}
-
-		
 	}
 }

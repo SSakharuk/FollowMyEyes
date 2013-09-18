@@ -12,11 +12,13 @@ namespace FollowMyEyes.UI
 	public class ConfigurationPresenter
 	{
 		private readonly IData _data;
+		private int _processId;
 		private IConfigurationView _view;
 		private IViewLoader _viewLoader;
 		private Capture _capture;
 		private DispatcherTimer _dispatcherTimer;
-		private HaarCascade _haarCascade;
+		private HaarCascade _faceHaarCascade;
+		private HaarCascade _eyeHaarCascade;
 
 		public ConfigurationPresenter(IData data, IViewLoader viewLoader)
 		{
@@ -45,22 +47,40 @@ namespace FollowMyEyes.UI
 			StartCameraDetection();
 		}
 
-		public void StartFollowEyes()
+		public void StartFollowEyes(int processId)
 		{
+			_processId = processId;
 			StopCameraDetection();
 			CheckEyes();
-
 		}
+									   
+		#region Reimplement
 
+		// For configuration
 		private void CheckEyes()
 		{
 			_capture = _capture ?? new Capture();
-			_haarCascade = _haarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
+			_faceHaarCascade = _faceHaarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
+			_eyeHaarCascade = _eyeHaarCascade ?? new HaarCascade(@"haarcascade_eye.xml");
 			_dispatcherTimer = _dispatcherTimer ?? new DispatcherTimer();
 			_dispatcherTimer.Tick += CheckEyes;
-			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
 			_dispatcherTimer.Start();
 		}
+
+		// For usage
+		private void StartCameraDetection()
+		{
+			_capture = _capture ?? new Capture();
+			_faceHaarCascade = _faceHaarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
+			_eyeHaarCascade = _eyeHaarCascade ?? new HaarCascade(@"haarcascade_eye.xml");
+			_dispatcherTimer = _dispatcherTimer ?? new DispatcherTimer();
+			_dispatcherTimer.Tick += ShowCameraFrame;
+			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+			_dispatcherTimer.Start();
+		}
+
+		#endregion
 
 		private void UpdateWindowWidth()
 		{
@@ -89,17 +109,7 @@ namespace FollowMyEyes.UI
 
 		private void UpdateImage()
 		{
-			_view.ImageSource = DetectionLogic.GetImageFromCamera(_capture, _haarCascade);
-		}
-
-		private void StartCameraDetection()
-		{
-			_capture = _capture ?? new Capture();
-			_haarCascade = _haarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
-			_dispatcherTimer =_dispatcherTimer ?? new DispatcherTimer();
-			_dispatcherTimer.Tick += ShowCameraFrame;
-			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-			_dispatcherTimer.Start();
+			_view.ImageSource = DetectionLogic.GetImageFromCamera(_capture, _faceHaarCascade, _eyeHaarCascade);
 		}
 
 		private void StopCameraDetection()
@@ -115,7 +125,7 @@ namespace FollowMyEyes.UI
 
 		private void CheckEyes(object sender, EventArgs e)
 		{
-			DetectionLogic.CheckEyesDetection(_capture, _haarCascade);
+			DetectionLogic.CheckEyesDetection(_capture, _faceHaarCascade, _eyeHaarCascade, _processId);
 		}
 	}
 }

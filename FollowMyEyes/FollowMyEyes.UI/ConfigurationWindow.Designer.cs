@@ -44,6 +44,9 @@ namespace FollowMyEyes.UI
 			this._gridView = new System.Windows.Forms.DataGridView();
 			this._imageBox = new Emgu.CV.UI.ImageBox();
 			this._upDownControl = new System.Windows.Forms.DomainUpDown();
+			this._saveImage = new System.Windows.Forms.Button();
+			this._name = new System.Windows.Forms.TextBox();
+			this._status = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this._gridView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._imageBox)).BeginInit();
 			this.SuspendLayout();
@@ -59,11 +62,13 @@ namespace FollowMyEyes.UI
 			// 
 			// _processesComboBox
 			// 
+			this._processesComboBox.DisplayMember = "ProcessName";
 			this._processesComboBox.FormattingEnabled = true;
 			this._processesComboBox.Location = new System.Drawing.Point(650, 21);
 			this._processesComboBox.Name = "_processesComboBox";
 			this._processesComboBox.Size = new System.Drawing.Size(245, 21);
 			this._processesComboBox.TabIndex = 2;
+			this._processesComboBox.ValueMember = "ProcessId";
 			// 
 			// _processLabel
 			// 
@@ -106,17 +111,45 @@ namespace FollowMyEyes.UI
 			this._upDownControl.Items.Add("2.0");
 			this._upDownControl.Items.Add("3.0");
 			this._upDownControl.Items.Add("5.0");
-			this._upDownControl.Location = new System.Drawing.Point(650, 305);
+			this._upDownControl.Location = new System.Drawing.Point(39, 287);
 			this._upDownControl.Name = "_upDownControl";
 			this._upDownControl.Size = new System.Drawing.Size(120, 20);
 			this._upDownControl.TabIndex = 6;
 			this._upDownControl.Text = "0.1";
+			// 
+			// _saveImage
+			// 
+			this._saveImage.Location = new System.Drawing.Point(471, 349);
+			this._saveImage.Name = "_saveImage";
+			this._saveImage.Size = new System.Drawing.Size(75, 23);
+			this._saveImage.TabIndex = 7;
+			this._saveImage.Text = "Save";
+			this._saveImage.UseVisualStyleBackColor = true;
+			// 
+			// _name
+			// 
+			this._name.Location = new System.Drawing.Point(332, 349);
+			this._name.Name = "_name";
+			this._name.Size = new System.Drawing.Size(100, 20);
+			this._name.TabIndex = 8;
+			// 
+			// _status
+			// 
+			this._status.AutoSize = true;
+			this._status.Font = new System.Drawing.Font("Microsoft Sans Serif", 23.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this._status.Location = new System.Drawing.Point(335, 419);
+			this._status.Name = "_status";
+			this._status.Size = new System.Drawing.Size(0, 35);
+			this._status.TabIndex = 9;
 			// 
 			// ConfigurationWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1067, 610);
+			this.Controls.Add(this._status);
+			this.Controls.Add(this._name);
+			this.Controls.Add(this._saveImage);
 			this.Controls.Add(this._upDownControl);
 			this.Controls.Add(this._gridView);
 			this.Controls.Add(this._processLabel);
@@ -142,7 +175,6 @@ namespace FollowMyEyes.UI
 
 		private Capture _capture;
 		private DispatcherTimer _dispatcherTimer;
-		
 
 		public ConfigurationPresenter Presenter
 		{
@@ -186,7 +218,11 @@ namespace FollowMyEyes.UI
 
 		private void _followEyesButton_Click(object sender, System.EventArgs e)
 		{
-			presenter.StartFollowEyes();
+			presenter.StartFollowEyes((int)_processesComboBox.SelectedValue);
 		}
+
+		private System.Windows.Forms.Button _saveImage;
+		private System.Windows.Forms.TextBox _name;
+		private System.Windows.Forms.Label _status;
 	}
 }
