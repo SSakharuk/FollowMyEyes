@@ -19,6 +19,8 @@ namespace FollowMyEyes.UI
 		private DispatcherTimer _dispatcherTimer;
 		private HaarCascade _faceHaarCascade;
 		private HaarCascade _eyeHaarCascade;
+		private bool _eyeDetection;
+		private bool _faceRecognition;
 
 		public ConfigurationPresenter(IData data, IViewLoader viewLoader)
 		{
@@ -44,7 +46,14 @@ namespace FollowMyEyes.UI
 			UpdateWindowName();
 			UpdateActionButtonText();
 			UpdateProcesses();
+			UpdateFaceImages();
 			StartCameraDetection();
+		}
+
+		public void UpdateDetectionOptions(bool needEyeDetection, bool needFaceRecognition)
+		{
+			_eyeDetection = needEyeDetection;
+			_faceRecognition = needFaceRecognition;
 		}
 
 		public void StartFollowEyes(int processId)
@@ -53,7 +62,7 @@ namespace FollowMyEyes.UI
 			StopCameraDetection();
 			CheckEyes();
 		}
-									   
+
 		#region Reimplement
 
 		// For configuration
@@ -61,7 +70,6 @@ namespace FollowMyEyes.UI
 		{
 			_capture = _capture ?? new Capture();
 			_faceHaarCascade = _faceHaarCascade ?? new HaarCascade(@"haarcascade_frontalface_alt.xml");
-			_eyeHaarCascade = _eyeHaarCascade ?? new HaarCascade(@"haarcascade_eye.xml");
 			_dispatcherTimer = _dispatcherTimer ?? new DispatcherTimer();
 			_dispatcherTimer.Tick += CheckEyes;
 			_dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
@@ -109,7 +117,12 @@ namespace FollowMyEyes.UI
 
 		private void UpdateImage()
 		{
-			_view.ImageSource = DetectionLogic.GetImageFromCamera(_capture, _faceHaarCascade, _eyeHaarCascade);
+			_view.ImageSource = DetectionLogic.GetImageFromCamera(_capture, _faceHaarCascade, _eyeHaarCascade, _eyeDetection, _faceRecognition, _view.FaceImages);
+		}
+
+		private void UpdateFaceImages()
+		{
+			_view.FaceImages = Data.FaceImages;
 		}
 
 		private void StopCameraDetection()
@@ -125,7 +138,12 @@ namespace FollowMyEyes.UI
 
 		private void CheckEyes(object sender, EventArgs e)
 		{
-			DetectionLogic.CheckEyesDetection(_capture, _faceHaarCascade, _eyeHaarCascade, _processId);
+			DetectionLogic.CheckEyesDetection(_capture, _faceHaarCascade, _processId);
+		}
+
+		public void SaveFace(string name)
+		{
+			_view.FaceImages = DetectionLogic.SaveFace(name, _view.FaceImages);
 		}
 	}
 }

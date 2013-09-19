@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Emgu.CV;
+using Emgu.CV.Structure;
 using FollowMyEyes.ModelTemplate;
 
 namespace FollowMyEyes.Data
@@ -17,6 +18,8 @@ namespace FollowMyEyes.Data
 		public string ActionButtonName { get; set; }
 		public string ProcessesLabel { get; set; }
 		public IEnumerable<IProcessInfo> ProcessesList { get; set; }
+
+		public Dictionary<string, List<Image<Gray, byte>>> FaceImages { get; set; } 
 
 		#endregion
 	}

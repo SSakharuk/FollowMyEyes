@@ -38,6 +38,9 @@ namespace FollowMyEyes.UI
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this._followEyesButton = new System.Windows.Forms.Button();
 			this._processesComboBox = new System.Windows.Forms.ComboBox();
 			this._processLabel = new System.Windows.Forms.Label();
@@ -47,6 +50,8 @@ namespace FollowMyEyes.UI
 			this._saveImage = new System.Windows.Forms.Button();
 			this._name = new System.Windows.Forms.TextBox();
 			this._status = new System.Windows.Forms.Label();
+			this._checkEyes = new System.Windows.Forms.CheckBox();
+			this._checkFaceRecognition = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this._gridView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this._imageBox)).BeginInit();
 			this.SuspendLayout();
@@ -82,10 +87,34 @@ namespace FollowMyEyes.UI
 			// 
 			this._gridView.AllowUserToAddRows = false;
 			this._gridView.AllowUserToDeleteRows = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this._gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this._gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this._gridView.DefaultCellStyle = dataGridViewCellStyle2;
 			this._gridView.Location = new System.Drawing.Point(39, 21);
 			this._gridView.Name = "_gridView";
 			this._gridView.ReadOnly = true;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this._gridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this._gridView.Size = new System.Drawing.Size(566, 245);
 			this._gridView.TabIndex = 4;
 			// 
@@ -125,6 +154,7 @@ namespace FollowMyEyes.UI
 			this._saveImage.TabIndex = 7;
 			this._saveImage.Text = "Save";
 			this._saveImage.UseVisualStyleBackColor = true;
+			this._saveImage.Click += new System.EventHandler(this._saveImage_Click);
 			// 
 			// _name
 			// 
@@ -142,11 +172,35 @@ namespace FollowMyEyes.UI
 			this._status.Size = new System.Drawing.Size(0, 35);
 			this._status.TabIndex = 9;
 			// 
+			// _checkEyes
+			// 
+			this._checkEyes.AutoSize = true;
+			this._checkEyes.Location = new System.Drawing.Point(341, 287);
+			this._checkEyes.Name = "_checkEyes";
+			this._checkEyes.Size = new System.Drawing.Size(83, 17);
+			this._checkEyes.TabIndex = 10;
+			this._checkEyes.Text = "Check Eyes";
+			this._checkEyes.UseVisualStyleBackColor = true;
+			this._checkEyes.CheckedChanged += new System.EventHandler(this._checkEyes_CheckedChanged);
+			// 
+			// _checkFaceRecognition
+			// 
+			this._checkFaceRecognition.AutoSize = true;
+			this._checkFaceRecognition.Location = new System.Drawing.Point(341, 311);
+			this._checkFaceRecognition.Name = "_checkFaceRecognition";
+			this._checkFaceRecognition.Size = new System.Drawing.Size(105, 17);
+			this._checkFaceRecognition.TabIndex = 11;
+			this._checkFaceRecognition.Text = "Face recognition";
+			this._checkFaceRecognition.UseVisualStyleBackColor = true;
+			this._checkFaceRecognition.CheckedChanged += new System.EventHandler(this._checkFaceRecognition_CheckedChanged);
+			// 
 			// ConfigurationWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1067, 610);
+			this.Controls.Add(this._checkFaceRecognition);
+			this.Controls.Add(this._checkEyes);
 			this.Controls.Add(this._status);
 			this.Controls.Add(this._name);
 			this.Controls.Add(this._saveImage);
@@ -221,8 +275,15 @@ namespace FollowMyEyes.UI
 			presenter.StartFollowEyes((int)_processesComboBox.SelectedValue);
 		}
 
+		private void _saveImage_Click(object sender, System.EventArgs e)
+		{
+			presenter.SaveFace(_name.Text);
+		}
+
 		private System.Windows.Forms.Button _saveImage;
 		private System.Windows.Forms.TextBox _name;
 		private System.Windows.Forms.Label _status;
+		private System.Windows.Forms.CheckBox _checkEyes;
+		private System.Windows.Forms.CheckBox _checkFaceRecognition;
 	}
 }

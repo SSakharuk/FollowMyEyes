@@ -37,6 +37,7 @@
     <Reference Include="Emgu.CV.UI">
       <HintPath>..\Resources\Emgu.CV.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Emgu.Util, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

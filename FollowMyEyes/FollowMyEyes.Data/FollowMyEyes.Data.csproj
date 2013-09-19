@@ -34,6 +34,7 @@
     <Reference Include="Emgu.CV">
       <HintPath>..\Resources\Emgu.CV.dll</HintPath>
     </Reference>
+    <Reference Include="Emgu.Util, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
